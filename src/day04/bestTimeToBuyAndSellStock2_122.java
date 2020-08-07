@@ -33,8 +33,17 @@ Constraints:
 
  * */
 
+//思路1 ：用一个变量记录每次交易的利润，只要两天之间的差值大于0就加入到利润中
+
 public class bestTimeToBuyAndSellStock2_122 {
 	 public int maxProfit(int[] prices) {
+	        int profit = 0;
+	        for (int i = 0; i < prices.length -1; i++) {
+				if (prices[i+1] - prices[i] > 0) {
+					profit += prices[i+1] - prices[i];
+				}
+			}
 	        
+	        return profit;
 	    }
 }
