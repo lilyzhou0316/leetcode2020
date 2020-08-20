@@ -37,6 +37,66 @@ Explanation: For n = 3 the term was "21" in which we have two groups "2" and "1"
   "11", so the answer is the concatenation of "12" and "11" which is "1211".
  * */
 
+//思路1:recursion
+
 public class CountandSay_38 {
-	 public String countAndSay(int n) {}
+//	 public String countAndSay(int n) {
+//		 // the nth term is the read-off of the (n - 1)th term
+//		        // better with dp since certain and duplicate
+//		        String res = "1";//base case，n=1
+//		        int i = 1;
+//		        while (i < n) {
+//		            res = readOff(res);
+//		             i++;
+//		        }
+//		        
+//		        return res;
+//		    }
+//		    
+//		    public String readOff(String str) {
+//		        StringBuilder strB = new StringBuilder();
+//		        char[] cArray = str.toCharArray();
+//		        int count=0;
+//		        for (int i=0; i<cArray.length; i++) {
+//		            if (i == 0 || (i > 0 && cArray[i-1] == cArray[i])) {
+//		                count++;
+//		            } else {//current char is not equals to prev char
+//		                strB.append(count);
+//		                strB.append(cArray[i-1]);
+//		                count=1;
+//		            }
+//		        }
+//		        //加入最后一个char
+//		        strB.append(count);
+//		        strB.append(cArray[cArray.length-1]);
+//		        
+//		        return strB.toString();
+//		    }
+	
+	 public String countAndSay(int n) {
+		 String reString = "";
+		 if(n == 1)return "1";
+		 if(n == 2)return "11";
+		 if(n > 2) {
+		        StringBuilder strB = new StringBuilder();
+		        String str = countAndSay(n - 1);
+		        char[] cArray = str.toCharArray();
+		        int count=0;
+		        for (int i=0; i<cArray.length; i++) {
+		            if (i == 0 || (i > 0 && cArray[i-1] == cArray[i])) {
+		                count++;
+		            } else {//current char is not equals to prev char
+		                strB.append(count);
+		                strB.append(cArray[i-1]);
+		                count=1;
+		            }
+		        }
+		        //加入最后一个char
+		        strB.append(count);
+		        strB.append(cArray[cArray.length-1]);
+		        
+		        return strB.toString();
+		 }
+		 return reString;
+	 }
 }
