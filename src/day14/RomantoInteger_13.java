@@ -1,5 +1,8 @@
 package day14;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
@@ -59,6 +62,28 @@ Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  * */
 
+//思路：列出所有现有可以组成的数字和对应的字符（7个），然后遍历给予的string，找对应的值（除了4，9，其它字符都是前一个大于等于后一个）
 public class RomantoInteger_13 {
-	public int romanToInt(String s) {}
+	public int romanToInt(String s) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("I", 1);
+		map.put("V", 5);
+		map.put("X", 10);
+		map.put("L", 50);
+		map.put("C", 100);
+		map.put("D", 500);
+		map.put("M", 1000);
+		
+		int res = 0;
+		int i;
+		for ( i = 1; i < s.length() ; i++) {
+			if(map.get(s.charAt(i)) > map.get(s.charAt(i - 1))) {
+				res += -map.get(s.charAt(i -1));
+			}else {
+				res += map.get(s.charAt(i -1));
+			}
+		}
+		res += map.get(s.charAt(i - 1));
+		return res;
+	}
 }

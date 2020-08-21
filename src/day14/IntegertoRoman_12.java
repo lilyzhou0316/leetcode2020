@@ -51,6 +51,27 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
  * */
 
+//思路：与13题正好相反，把所有字母可以表示出的数字（12个）用数组存起来，然后用给的num除以数组里的数字（从大到小）
+//如果整除大于1，说明能从当前num里减去该数字
 public class IntegertoRoman_12 {
-	public String intToRoman(int num) {}
+	public String intToRoman(int num) {
+		String[] symbolStrings = {
+				"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"
+		};
+		int[] values = {
+				1000,900,500,400,100,90,50,40,10,9,5,4,1
+		};
+		String reString = "";
+		int i = 0;
+		while(i < values.length){
+			if(num - values[i] >= 0) {
+				reString += symbolStrings[i];
+				num = num - values[i];
+				i = 0;
+			}else {
+				i++;
+			}
+		}
+		return reString;
+	}
 }
