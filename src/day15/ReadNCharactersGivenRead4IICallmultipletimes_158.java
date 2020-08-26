@@ -60,6 +60,8 @@ sol.read(buf, 2); // Now buf should contain "bc". We read a total of 2 character
 the file, so return 2.
 sol.read(buf, 1); // We have reached the end of file, no more characters can be read. 
 So return 0.
+
+
 Example 2:
 
 File file("abc");
@@ -72,13 +74,30 @@ So return 0.
 
 Note:
 
-Consider that you cannot manipulate the file directly, the file is only accesible for read4 but not for read.
+Consider that you cannot manipulate the file directly, the file is only accesible for
+ read4 but not for read.
 The read function may be called multiple times.
-Please remember to RESET your class variables declared in Solution, as static/class variables are persisted across multiple test cases. Please see here for more details.
-You may assume the destination buffer array, buf, is guaranteed to have enough space for storing  n  characters.
+Please remember to RESET your class variables declared in Solution, as static/class 
+variables are persisted across multiple test cases. Please see here for more details.
+You may assume the destination buffer array, buf, is guaranteed to have enough space
+ for storing  n  characters.
 It is guaranteed that in a given test case the same buffer buf is called by read.
  * */
 
 public class ReadNCharactersGivenRead4IICallmultipletimes_158 {
-	public int read(char[] buf, int n) {}
+	int read = 0, write = 0;//read记录从文件里读到的当前位置，write记录写入buf的当前位置
+	char[] temp = new char[4];
+	public int read(char[] buf, int n) {
+		for (int i = 0; i < n; i++) {//n是要求要写入的字符个数
+			if(read == write) {//说明通过上一次read4读取到的字符都已经写入了buf中
+				read = read4(temp);//重新再读取文件剩下的字符
+				write = 0;//又重新开始写入buf
+				if(read == 0)return i;//如果当前从文件里没有读到任何字符，说明文件已经读到末尾了，
+				//当前i即为实际读到的字符个数
+			}
+			buf[i] = temp[write];
+			write++;
+		}
+		return n;
+	}
 }

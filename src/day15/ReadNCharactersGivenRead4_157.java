@@ -54,18 +54,24 @@ Output: 3
 Explanation: After calling your read method, buf should contain "abc". We read a total 
 of 3 characters from the file, so return 3. Note that "abc" is the file's content, not 
 buf. buf is the destination buffer that you will have to write the results to.
+
+
 Example 2:
 
 Input: file = "abcde", n = 5
 Output: 5
 Explanation: After calling your read method, buf should contain "abcde". We read a 
 total of 5 characters from the file, so return 5.
+
+
 Example 3:
 
 Input: file = "abcdABCD1234", n = 12
 Output: 12
 Explanation: After calling your read method, buf should contain "abcdABCD1234". 
 We read a total of 12 characters from the file, so return 12.
+
+
 Example 4:
 
 Input: file = "leetcode", n = 5
@@ -83,6 +89,12 @@ You may assume the destination buffer array, buf, is guaranteed to have enough s
 for storing  n  characters.
  * */
 
+//思路：recursion
 public class ReadNCharactersGivenRead4_157 {
-	public int read(char[] buf, int n) {}
+	public int read(char[] buf, int n) {
+		int temp = read4(buf);
+		if(temp >= n)return n;//当剩余需要读取的字符数n不够4个时
+		if(temp < 4)return temp;//当文件中剩余的能被读取字符数不够4个时
+		return 4 + read(buf, n - 4);
+	}
 }
