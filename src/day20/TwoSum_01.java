@@ -1,5 +1,8 @@
 package day20;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * Given an array of integers nums and and integer target, return the indices of the two numbers 
  * such that they add up to target.
@@ -37,6 +40,25 @@ Constraints:
 -109 <= target <= 109
 Only one valid answer exists.
  * */
+
+//因为每个数只能用一次，所以需要判断每次相加的数的索引是否重复，用map映射每个数及其索引值
 public class TwoSum_01 {
-	public int[] twoSum(int[] nums, int target) {}
+	public int[] twoSum(int[] nums, int target) {
+		
+		Map<Integer, Integer> m = new HashMap<Integer, Integer>();
+		for (int i = 0; i < nums.length; i++) {
+			m.put(nums[i],i);
+		}
+		
+		for (int i = 0; i < nums.length; i++) {//遍历数组取出每个组并与map中的另一个数相加看是否等于目标值
+			if(m.containsKey(target - nums[i]) && m.get(target - nums[i]) != i) {
+				int[] res = new int[2];
+				res[0] = i;
+				res[1] = m.get(target - nums[i]);
+				return res;
+				
+			}
+		}
+		return null;
+	}
 }

@@ -25,8 +25,21 @@ Constraints:
 
 1 <= num <= 2^31 - 1
  * */
+
+//思路：类似题69找平方根
 public class ValidPerfectSquare_367 {
 public boolean isPerfectSquare(int num) {
-        
+	 if(num < 2)return true;
+     
+     long l = 1;
+    long r = num;
+    while(l <= r) {
+    	long mid = l + (r - l)/2;
+        long guessSquare = mid * mid;
+    	if(guessSquare == num)return true;
+    	else if(guessSquare > num)r = mid - 1;
+    	else l = mid + 1;
+    }
+    return false;
     }
 }
