@@ -47,6 +47,7 @@ public class ThreeSum_15 {
 					temp.add(nums[l]);
 					temp.add(nums[r]);
 					res.add(temp);
+					//在当前结果基础上，l,r分别移动，如果重复则跳过重复元素
 					 while(l<r && nums[l] == nums[++l]);//跳过重复的nums[left]
 	                 while(l<r && nums[r]==nums[--r]);//跳过重复的nums[right]
 				}else if(nums[l] + nums[r] > -nums[i]) {
