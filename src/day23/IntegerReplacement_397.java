@@ -32,8 +32,19 @@ Explanation:
 or
 7 -> 6 -> 3 -> 2 -> 1
  * */
+
+//思路：递归
 public class IntegerReplacement_397 {
 public int integerReplacement(int n) {
+        if(n == 1)return 0;
+        if (n == Integer.MAX_VALUE)//考虑溢出情况
+            return 32;
         
+        if(n % 2 == 0)return 1 + integerReplacement(n / 2);//n为偶数时，直接除以2，次数+1
+        else {//n为奇数时
+        	//先给n加1或者减1，然后再除以2，操作次数加2
+        	return 2 + Math.min(integerReplacement((n + 1) / 2), integerReplacement((n - 1) / 2));
+        	
+        }
     }
 }
