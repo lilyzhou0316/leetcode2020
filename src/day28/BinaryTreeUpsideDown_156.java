@@ -40,6 +40,21 @@ Here's an example:
      5
 The above binary tree is serialized as [1,2,3,#,#,4,#,#,5].
  * */
+
+//思路：这道题让我们把一棵二叉树上下颠倒一下，而且限制了右节点要么为空要么一定会有对应的左节点。上下颠倒后原来二叉树的最左子节点变成了根节点，其对应的右节点变成了其左子节点，其父节点变成了其右子节点，相当于顺时针旋转了一下
 public class BinaryTreeUpsideDown_156 {
 	public TreeNode upsideDownBinaryTree(TreeNode root) {}
+	
+	class TreeNode {
+	    int val;
+	    TreeNode left;
+	    TreeNode right;
+	    TreeNode() {}
+	    TreeNode(int val) { this.val = val; }
+	    TreeNode(int val, TreeNode left, TreeNode right) {
+	        this.val = val;
+	        this.left = left;
+	        this.right = right;
+	    }
+	}
 }

@@ -53,9 +53,8 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
      }else if(root.val < Math.min(p.val, q.val)){
          //p,q都在右子树上,继续往右子树递归
          return lowestCommonAncestor(root.right, p, q);
-     }
-    else {
-     	//p,q都在右子树上，或者一边一个
+     }else {
+     	//p,q一边一个
      	targeTreeNode.val = root.val;
      }
      return targeTreeNode;
