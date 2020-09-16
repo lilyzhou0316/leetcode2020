@@ -58,7 +58,7 @@ public void flatten(TreeNode root) {
 //	}
 
 	
-	//解法2，类似morris前序遍历,找前驱节点
+	//解法2，找前驱节点
 	TreeNode cur = root;
 	while(cur != null) {
 		if(cur.left != null) {
