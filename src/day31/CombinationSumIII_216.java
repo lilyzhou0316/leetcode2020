@@ -1,5 +1,7 @@
 package day31;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Find all valid combinations of k numbers that sum up to n such that the 
@@ -53,8 +55,33 @@ Constraints:
 2 <= k <= 9
 1 <= n <= 60
  * */
+
+//思路：与题39，40类似，只不过数字不重复，只能用一次，且要考虑k和n的关系
 public class CombinationSumIII_216 {
 public List<List<Integer>> combinationSum3(int k, int n) {
-        
+	List<List<Integer>> res = new ArrayList<>();
+	List<Integer> output = new ArrayList<Integer>();
+	
+	if(k >= n) {
+		return  res;
+	}
+	helper(res, output, 1, k, n);
+	return res;
+	
     }
+
+public void helper(List<List<Integer>> res,List<Integer> output, int start, int k, int n) {
+	if(n < 0)return;
+	if(output.size() >= k && n > 0)return;
+	if(output.size() == k && n == 0) {
+		res.add(new ArrayList<Integer>(output));
+		return;
+	}
+	
+	for (int i = start; i < 10; i++) {
+		output.add(i);
+		helper(res, output, i + 1, k, n - i);
+		output.remove(output.size() - 1);
+	}
+}
 }
