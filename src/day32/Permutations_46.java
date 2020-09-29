@@ -35,6 +35,7 @@ public class Permutations_46 {
 		
 		int[] visited = new int[nums.length];
 		helper(0, nums, visited, cur, res);
+		System.out.println(res);
 		return res;
 	}
 	public void helper(int len, int[] nums, int[] visited,List<Integer> cur, List<List<Integer>> res) {
@@ -53,5 +54,11 @@ public class Permutations_46 {
 			cur.remove(cur.size() - 1);
 			visited[i] = 0;
 		}
+	}
+	
+	public static void main(String[] args) {
+		Permutations_46 a = new Permutations_46();
+		int[] nums = {1,2,3};
+		a.permute(nums);
 	}
 }
