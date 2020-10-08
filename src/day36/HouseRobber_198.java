@@ -30,8 +30,24 @@ Constraints:
 0 <= nums.length <= 100
 0 <= nums[i] <= 400
  * */
+
+//思路：用dp一维数组保存到当前房子能抢到的最大钱数，
 public class HouseRobber_198 {
 public int rob(int[] nums) {
-        
+	  if(nums.length == 0 || nums == null)return 0;
+      if(nums.length == 1)return nums[0];
+      
+      int[] dp = new int[nums.length];//dp[i]表示抢到索引为i的房子（不管当前房子抢不抢）的最大总值
+      dp[0] = nums[0];//只有一栋房子时
+      dp[1] = Math.max(nums[0], nums[1]);//有两栋房子时，取较大值
+      
+      for (int i = 2; i < nums.length; i++) {
+			//超过两栋房子时，如果抢当前房子，则之前一栋被抢的应为i - 2，
+      	//如果不抢当前房子，则之前被抢的应为i - 1
+      	//取两种情况中的较大值
+      	dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
+		}
+      
+      return dp[nums.length - 1] ;
     }
 }
