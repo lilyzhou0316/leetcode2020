@@ -84,6 +84,7 @@ public class RegularExpressionMatching_10 {
 //	        boolean[][] dp = new boolean[m + 1][n + 1];
 //	        dp[0][0] = true;
 //	        
+		//当s为空，p不为空时，如果p的奇数索引上的字符为*，且前面的子串为true，则为true
 //	        for (int j = 1; j < n; j++) {
 //	            //从p的第二个字符开始，如果它为*则可消去它前面位置的任意字符（出现次数为0或多次）
 //	            //如a*b* 还是与""匹配
@@ -97,7 +98,7 @@ public class RegularExpressionMatching_10 {
 //	        for (int i = 0; i < m; i++) {
 //	            for (int j = 0; j < n; j++) {
 //	                //如果p当前字符为.  或者p当前字符和s当前字符相同，则看前面的是否也匹配
-//	                if (p.charAt(j) == '.' || s.charAt(i) == p.charAt(j)) dp[i+ 1][j+ 1] = dp[i][j];
+//	                if (p.charAt(j) == '.' || s.charAt(i) == p.charAt(j)) dp[i + 1][j + 1] = dp[i][j];
 //	                //如果p当前字符为*
 //	                if (j > 0 && p.charAt(j) == '*') {
 //	                    //则看p的前一个字符，如果前一个字符与s的当前字符相同或者前一个字符是.
