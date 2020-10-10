@@ -39,8 +39,21 @@ The value of each node in the list is unique.
 The node to be deleted is in the list and is not a tail node
 
  * */
+
+//我的思路：因为链表里每个节点的值唯一，所以把要删除的节点的后面个节点的值一个一个往前赋值，
+//最后删除最后一个节点即可
 public class DeleteNodeinaLinkedList_237 {
 public void deleteNode(ListNode node) {
+	ListNode pre = new ListNode();
+	while(node.next != null) {
+		 pre = node;
+		node.val = node.next.val;
+		node = node.next;
+	}
+	
+	//出循环时node指向最后一个节点，删除即可
+	pre.next = null;
+        
         
     }
 }
