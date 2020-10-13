@@ -44,5 +44,17 @@ Each value on each linked list is in the range [1, 10^9].
 Your code should preferably run in O(n) time and use only O(1) memory.
  * */
 public class IntersectionofTwoLinkedLists_160 {
-	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {}
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		//思路：如果两个链表有交点，则把两个链表首尾连接起来后，
+		//两个表同时遍历则一定会一起遍历到交点位置，即l1 == l2 
+		ListNode l1 = headA;
+		ListNode l2 = headB;
+		
+		while(l1 != l2) {//即l1,l2不是同一个节点时
+			l1 = (l1 == null) ? headB : l1.next;//l1后移，如果指向null了说明一个链表遍历完了，则开始遍历另一个链表
+			l2 = (l2 == null) ? headA : l2.next;
+		}
+		//出循环时停在交点处，或者null（无交点）
+		return l1;
+	}
 }

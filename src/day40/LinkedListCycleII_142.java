@@ -11,9 +11,6 @@ as a parameter.
 
 Notice that you should not modify the linked list.
 
-Follow up:
-
-Can you solve it using O(1) (i.e. constant) memory?
 
 Example 1:
 
@@ -37,9 +34,33 @@ Constraints:
 The number of the nodes in the list is in the range [0, 104].
 -105 <= Node.val <= 105
 pos is -1 or a valid index in the linked-list.
+
+
+Follow up:
+
+Can you solve it using O(1) (i.e. constant) memory?
+
  * */
+
+//思路：这里还是要设快慢指针，不过这次要记录两个指针相遇的位置，当两个指针相遇了后，让其中一个指针从
+//链表头开始，一步一步遍历链表，此时再相遇的位置就是链表中环的起始位置
 public class LinkedListCycleII_142 {
 public ListNode detectCycle(ListNode head) {
+        ListNode fast = head, slow = head;
         
+        while(fast != null && fast.next != null) {
+        	fast = fast.next.next;
+        	slow = slow.next;
+        	if (slow == fast) break;
+        }
+        if(fast == null || fast.next == null)return null;//只要出现null就没有环
+        
+        //有环，让慢指针从头开始遍历链表，当快慢指针再次相遇，则找到环起点
+        slow = head;
+        while(slow != fast) {
+        	slow = slow.next;
+        	fast = fast.next;
+        }
+        return fast;
     }
 }
