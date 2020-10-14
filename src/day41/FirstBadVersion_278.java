@@ -24,6 +24,8 @@ call isBadVersion(3) -> false
 call isBadVersion(5) -> true
 call isBadVersion(4) -> true
 Then 4 is the first bad version.
+
+
 Example 2:
 
 Input: n = 1, bad = 1
@@ -38,5 +40,20 @@ Constraints:
 /* The isBadVersion API is defined in the parent class VersionControl.
 boolean isBadVersion(int version); */
 public class FirstBadVersion_278 {
-	 public int firstBadVersion(int n) {}
+	 public int firstBadVersion(int n) {
+		 //思路：二分法查找目标值
+		 int l = 1;
+		 int r = n;
+		 while(l <= r) {
+			 int mid = l + (r - l) / 2;
+			 if(isBadVersion(mid)) {
+				 //当前mid对应的版本及其之后的版本都是坏的，但它之前可能还有坏的版本，需要检查前半部分
+				 r = mid - 1;
+			 }else {
+				 //当前mid对应的版本是好的，检查它之后的版本
+				 l = mid + 1;
+			 }
+		 }
+		 return r + 1;
+	 }
 }
